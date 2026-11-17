@@ -115,6 +115,10 @@ Walk it cold, as an agent with no memory:
 
 Then run the form's own checks, in its reference. If a step fails, fix the structure, not by explaining more but by moving or splitting files until the walk works.
 
+## After you build or restructure
+
+Tell the owner to run `/librarian` on the result. It records `kind: icm` in the folder's `_index.md` and, if the folder is also to be a brain, applies the brain rules. This skill uses the librarian's `folder_scan.py` when installed, and works without it (the three questions in "First"); it never writes the `_index.md` marker itself.
+
 ## If the folder is to be a brain
 
 A brain is a Titan-style filled record (the only thing called a brain; anything else is a folder). When the owner wants one, this skill gives it the structure and the `/librarian` skill gives it the rules.
