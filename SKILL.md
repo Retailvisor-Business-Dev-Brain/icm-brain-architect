@@ -29,8 +29,8 @@ Every ICM starts from these ten. They are defaults: when you know what works and
 
 ICM is for **repeatable processes**: check my email, write a report, make an animation. A folder of files with no order (a Downloads-type shelf: session packages, kits, mixed formats, zips, duplicates) is not a process, and structuring it invents a pipeline that does not exist. Check before choosing a mode:
 
-1. If `_FOLDER.md` exists, read its `kind:`. `data` or `brain`: stop. Say "this is a {kind} folder, not an ICM workspace; I am not restructuring it". Offer `/librarian` (it logs a data shelf and enforces a brain's rules). Write nothing.
-2. If `/librarian` is installed and there is no marker, run its `scripts/folder_scan.py FOLDER` (read-only) and follow its verdict. Otherwise ask the three questions: is there a repeating unit of work? does one step feed the next? would you run it again with new input? Three yes: continue. Any no: it is a data shelf; say so and stop.
+1. Read the folder's `AGENTS.md` frontmatter for `kind:` (`icm`, `data` or `brain`; the librarian records it there, and a legacy `_FOLDER.md` may hold it). `data` or `brain`: stop. Say "this is a {kind} folder, not an ICM workspace; I am not restructuring it". Offer `/librarian` (it logs a data shelf and enforces a brain's rules). Write nothing.
+2. If `/librarian` is installed and there is no `kind:`, run its `scripts/folder_scan.py FOLDER` (read-only) and follow its verdict. Otherwise ask the three questions: is there a repeating unit of work? does one step feed the next? would you run it again with new input? Three yes: continue. Any no: it is a data shelf; say so and stop.
 3. Summoned on the wrong kind? Do not comply by building. Name the kind in one line, why (the evidence), and what to run instead. If the owner insists on ICM for a shelf, build only for the part that is a process and say what you left out.
 4. A data shelf may contain process folders (a workspace that already has its own `AGENTS.md` and stages). Each is its own ICM: leave it untouched, and never fold it into a tree you build for the parent.
 
