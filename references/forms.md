@@ -2,7 +2,7 @@
 
 Each form is a recipe over the three primitives in SKILL.md: sequence, shelf, catalog. What changes is the repeating unit and what the structure optimizes for. All of them are drawn from production workspaces, not theory. The table that picks one lives in SKILL.md (Build mode, step 2).
 
-Contents: 1 Pipeline · 2 Record library · 3 Knowledge bundle · 4 Context map · 5 System map
+Contents: 1 Pipeline · 2 Record library · 3 Knowledge bundle · 4 Context map · 5 System map · 6 Brain
 
 ## 1. Pipeline — the production line
 
@@ -118,3 +118,39 @@ workspace/
 ## 5. System map — a body of work as an edit graph
 
 The subject is a tree someone will change: a repository, a markdown vault, or both. Nouns become object cards, verbs become process cards, and `effects/` is an index into them, so a later agent can answer "what is this" and "what else moves" without slurping the tree. Its audit pipeline, card sections and walk test: [system-map.md](system-map.md).
+
+## 6. Brain — a shared record kept by a librarian
+
+The subject is the live record of what is true for a company, team or person: facts, policies, decisions, routines, people, products, suppliers, channels. Many agents and people read it before every answer and write back to it for years. Unlike a Knowledge bundle (the product is a model of how someone thinks) the product here is current truth with provenance; unlike a Context map it is not scored for automation. Operating protocol: [librarian.md](librarian.md). Filing and reviews: [brain-filing.md](brain-filing.md).
+
+```
+brain/
+├─ AGENTS.md               entry: routes to _CONTEXT.md and the librarian protocol
+├─ _CONTEXT.md             one page, under 100 lines, every line links to its home note
+├─ _System/                BRAIN-RULES.md (marks the workspace as a brain), ENTITY-REGISTRY.md,
+│                          COVERAGE-REGISTER.md, FIELD-AUTHORITY.md
+├─ 00-Inbox/               one lane per writer (<name>/), _Landing/ for commit blocks, _Receipts/
+├─ 01-Company/ ... 17-Projects/   shelves, one per area; each has _index.md and notes copied from a template
+├─ 02-Policies/            POL-NNN notes and 00-Gates.md (the gates no policy opens)
+├─ 03-Decisions/           DEC-/ACT- notes, proposed until the owner accepts the exact text
+├─ 04-Routines/            nightly, weekly, monthly, quarterly reviews, each a contract
+├─ 90-Logs/                append-only, monthly, every row has an op_id
+├─ 91-Evidence/            raw sources as received, never edited
+├─ 99-Archive/             superseded notes, a two line stub left behind
+└─ _tools/                 brain_check.py, links.py, index.py
+```
+
+Number the shelves to the owner's areas, not to this list: take the area names from the dialogue (Build step 1) and create only shelves that have content.
+
+**Defining moves:**
+- **Provenance on every note.** Frontmatter carries `owner`, `source_kind`, `source_uri`, `source_date`, `confidence`, `review_by`, `freshness_state`. Copy `assets/templates/brain-note.md`; `brain-rules.md` holds the allowed values.
+- **One fact, one home; supersede, never delete.** The note's Supersession register keeps the old line; whole-note replacement uses `superseded_by` and `supersedes`.
+- **Two audiences, two repositories (optional).** Restricted material (pay, cash, legal, corporate) lives in a second brain with the same shape, visible only to the owner. Each item is classified as it is read and written to the right brain; the team brain never links to an exec path. A single-audience brain collapses to one class.
+- **Registers are the catalog of truth.** `ENTITY-REGISTRY` (ids and spellings), `COVERAGE-REGISTER` (which sources feed it and how stale), `FIELD-AUTHORITY` (which source wins). The gaps are visible gaps.
+- **Writers have lanes.** Scheduled reviews commit ordinary checked changes; the owner's session commits when told to push; a teammate's agent writes only new captures in its own `00-Inbox/<name>/` lane; nobody else edits main.
+- **Reviews are the sequence.** Nightly (mechanical: `brain_check.py`, links, inbox reconciliation) and weekly (judgement: contradictions, policies in practice, three claims re-verified) are the first two routines; each ends at a check and a five line summary the owner reads. Seed the brain by backfill in the order in brain-filing.md section 7, one source at a time.
+- **The gates never move.** Money out, credentials, deletions, irreversibles are prepared by an agent and done by a named person.
+
+**Build steps.** After Build steps 1 and 2: (a) copy `brain-rules.md` to `_System/BRAIN-RULES.md` and the three registers beside it, filling the `{...}` fields; (b) scaffold only the shelves the dialogue named, each with an `_index.md`; (c) write `_CONTEXT.md` last; (d) copy `brain_check.py`, `links.py`, `index.py` into `_tools/`; (e) walk test, then `python -I _tools/brain_check.py .` and `python -I _tools/links.py .` must both pass before backfill starts.
+
+**Watch for:** a brain written like a wiki (prose with no source and date: it cannot be checked); `_CONTEXT.md` growing past one page; a fact copied instead of linked; restricted detail leaking through a commit message, a branch name or a file name; instructions pasted from emails treated as rules; reviews that report and nobody acts on (retire the check, never the safety checks); a build run on a platform that cannot commit, with no commit-block path (see librarian.md section 6).

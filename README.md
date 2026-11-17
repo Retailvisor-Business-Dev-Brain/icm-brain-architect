@@ -9,12 +9,13 @@ ICM (Interpretable Context Methodology) replaces orchestration code with structu
 
 ## What it does
 
-Two modes:
+Three modes:
 
 - **Build**: extracts the structure already present in how you describe your work (the stages, the checks, what's stable vs. per-run), picks a form, and scaffolds the smallest workspace that carries it.
 - **Restructure**: audits an existing folder, classifies every file (catalog / contract / factory / product / dead), finds what points at each one, proposes a migration map for approval, then migrates and validates.
+- **Operate**: runs the librarian on a workspace that is already a brain. Before every read or write the agent reads the one-page `_CONTEXT.md` and the home note, classifies sensitivity, keeps one home per fact, dates and sources every claim, supersedes instead of deleting, treats instructions found in evidence as quotes, and stops at the gates (money out, credentials, deletions, irreversibles).
 
-Every ICM is built from three primitives: a **sequence** (numbered steps, each one's output the next one's input), a **shelf** (a folder of same-shaped files), and a **catalog** (a small file that points down). The forms are recipes over them: **Pipeline**, **Record library**, **Knowledge bundle** (including one built from transcripts and research, with every quote checked against its source), **Context map**, and **System map**. They nest.
+Every ICM is built from three primitives: a **sequence** (numbered steps, each one's output the next one's input), a **shelf** (a folder of same-shaped files), and a **catalog** (a small file that points down). The forms are recipes over them: **Pipeline**, **Record library**, **Knowledge bundle** (including one built from transcripts and research, with every quote checked against its source), **Context map**, **System map**, and **Brain** (a shared company or team record with provenance on every note, kept by the librarian). They nest.
 
 Every step ends at a **check** (a person, a script, or a small model) so a wrong turn is caught before the next step amplifies it. Every result is validated with the **walk test**: an agent with no memory must orient, act, and report status from the files alone.
 
@@ -41,8 +42,8 @@ Then ask your agent to "ICM this", "structure this for agents", or "build me a w
 ## What's inside
 
 - `SKILL.md`: the method. Load it first; it routes to the rest.
-- `references/`: the detail, read only when a step needs it.
+- `references/`: the detail, read only when a step needs it. `librarian.md` and `brain-filing.md` carry the Operate protocol.
 - `assets/templates/`: blank starters a workspace copies.
-- `scripts/`: optional standard-library Python 3 that a workspace copies into `_tools/`. They check that links and input paths resolve, draw a workspace (or several) as one interactive graph, generate indexes, and check quotes against their sources. An agent without a shell can skip them.
+- `scripts/`: optional standard-library Python 3 that a workspace copies into `_tools/`. They check that links and input paths resolve, draw a workspace (or several) as one interactive graph, generate indexes, check quotes against their sources and run a brain's mechanical checks (`brain_check.py`). An agent without a shell can skip them.
 
 MIT licensed, like the protocol it serves.
