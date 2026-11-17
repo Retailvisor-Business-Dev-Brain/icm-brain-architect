@@ -1,6 +1,6 @@
 ---
 name: icm-architect
-description: Design a process, idea or body of knowledge into an ICM (Interpretable Context Methodology) workspace, where folder structure is the agent architecture, or restructure an existing folder, repo or vault into one. Use for "make this an ICM", "ICM this", "build me a workspace", "structure this for agents", "map this repo", "audit this folder", "what would a change hit", a second brain, team brain or context map, or turning transcripts and research into material for lectures, scripts or docs. Also "make this folder a personal, company, team or exec brain" (structure here, brain rules by the librarian skill).
+description: Design a process, idea or body of knowledge into an ICM (Interpretable Context Methodology) workspace, where folder structure is the agent architecture, or restructure an existing folder, repo or vault into one. Use for repeatable work only (not file shelves): "make this an ICM", "ICM this", "build me a workspace", "structure this for agents", "map this repo", "audit this folder", "what would a change hit", a second brain, team brain or context map, or turning transcripts and research into material for lectures, scripts or docs. Also "make this folder a personal, company, team or exec brain" (structure here, brain rules by the librarian skill).
 license: MIT
 ---
 
@@ -24,6 +24,15 @@ Every ICM starts from these ten. They are defaults: when you know what works and
 8. **Plain text, linkable, queryable** (Kernighan, Pike). Markdown + YAML frontmatter. Links make it a graph; frontmatter labels make it queryable. One home per fact; a link beats a copy. Links and input paths are relative and must resolve; wikilinks only in a declared Obsidian vault. The first heading names the file and its job, so `grep -rm1 '^# ' .` lists any tree.
 9. **Status lives on disk:** what exists, or one status line in the file it describes. Generated indexes (`_index.md`, file maps) are rebuilt by script, never hand-edited.
 10. **Instantiate by copying.** A new unit of work is a copy of a template, not a blank page. Templates live in `_templates/`, scripts in `_tools/`.
+
+## First: is this an ICM folder at all?
+
+ICM is for **repeatable processes**: check my email, write a report, make an animation. A folder of files with no order (a Downloads-type shelf: session packages, kits, mixed formats, zips, duplicates) is not a process, and structuring it invents a pipeline that does not exist. Check before choosing a mode:
+
+1. If `_FOLDER.md` exists, read its `kind:`. `data` or `brain`: stop. Say "this is a {kind} folder, not an ICM workspace; I am not restructuring it". Offer `/librarian` (it logs a data shelf and enforces a brain's rules). Write nothing.
+2. If `/librarian` is installed and there is no marker, run its `scripts/folder_scan.py FOLDER` (read-only) and follow its verdict. Otherwise ask the three questions: is there a repeating unit of work? does one step feed the next? would you run it again with new input? Three yes: continue. Any no: it is a data shelf; say so and stop.
+3. Summoned on the wrong kind? Do not comply by building. Name the kind in one line, why (the evidence), and what to run instead. If the owner insists on ICM for a shelf, build only for the part that is a process and say what you left out.
+4. A data shelf may contain process folders (a workspace that already has its own `AGENTS.md` and stages). Each is its own ICM: leave it untouched, and never fold it into a tree you build for the parent.
 
 ## Choose a mode
 
@@ -74,7 +83,7 @@ Their pauses become stage boundaries. Their "I always check X before Y" become c
 
 **1. Inventory before touching.** List the tree. For each area note what it is, when it was last touched, and what refers to it. Never delete or move in this pass.
 
-**2. Find the hidden form.** Ask the owner (or infer and confirm): what is the repeating unit here? Where does work enter and leave? The mess usually contains a real pipeline, library, or map that grew without a skeleton: extract it, don't replace it.
+**2. Find the hidden form.** Ask the owner (or infer and confirm): what is the repeating unit here? Where does work enter and leave? The mess often contains a real pipeline, library, or map that grew without a skeleton: extract it, don't replace it. Sometimes it contains none: a shelf of files that were only ever collected. Then there is nothing to extract; say so and stop (see First, above). Duplicates of a folder or its zip are a finding to report, not a reason to build.
 
 **3. Classify every file** into one of five roles:
 - **Catalog**: identity and routing (becomes or feeds `AGENTS.md` and index files; an existing `CLAUDE.md`, `GEMINI.md` or similar becomes a one-line pointer once its content has a home in `AGENTS.md` or a shelf, at step 6)
@@ -108,7 +117,7 @@ Then run the form's own checks, in its reference. If a step fails, fix the struc
 
 ## If the folder is to be a brain
 
-When the owner wants the folder to double as a personal, company, team or exec brain (a shared record every agent reads before answering), this skill gives it the structure and the `/librarian` skill gives it the rules.
+A brain is a Titan-style filled record (the only thing called a brain; anything else is a folder). When the owner wants one, this skill gives it the structure and the `/librarian` skill gives it the rules.
 
 1. Ask which profile: personal, team or exec (exec lives in its own private folder or repo; a team brain never links into it).
 2. Do Build or Restructure as usual. Make `AGENTS.md` route to a one-page `_CONTEXT.md`, keep one home per fact, and keep `_index.md` generated.
