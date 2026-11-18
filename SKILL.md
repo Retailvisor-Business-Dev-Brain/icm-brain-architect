@@ -29,7 +29,7 @@ Every ICM starts from these ten. They are defaults: when you know what works and
 
 ICM is for **repeatable processes**: check my email, write a report, make an animation. A folder of files with no order (a Downloads-type shelf: session packages, kits, mixed formats, zips, duplicates) is not a process, and structuring it invents a pipeline that does not exist. Check before choosing a mode:
 
-1. Read the folder's `_index.md` frontmatter for `kind:` (`icm`, `data` or `brain`; the librarian records it there; a legacy `AGENTS.md` or `_FOLDER.md` may hold it). `data` or `brain`: stop, and say "this is a {kind} folder, not an ICM workspace; I am not restructuring it". Offer `/librarian` (it logs a data shelf and enforces a brain's rules). Write nothing.
+1. Read the folder's note for `kind:` (`icm`, `data` or `brain`). The librarian records it in this workspace's own `AGENTS.md` frontmatter for an ICM folder, in `_index.md` for a data shelf, in `_CONTEXT.md` for a brain; an older version may have left it in `_FOLDER.md`. `data` or `brain`: stop, and say "this is a {kind} folder, not an ICM workspace; I am not restructuring it". Offer `/librarian` (it logs a data shelf and enforces a brain's rules). Write nothing.
 2. If `/librarian` is installed and there is no `kind:`, run its `scripts/folder_scan.py FOLDER` (read-only) and follow its verdict. Otherwise ask the three questions: is there a repeating unit of work? does one step feed the next? would you run it again with new input? Three yes: continue. Any no: it is a data shelf; say so and stop.
 3. Summoned on the wrong kind? Do not comply by building. Name the kind in one line, why (the evidence), and what to run instead. If the owner insists on ICM for a shelf, build only for the part that is a process and say what you left out.
 4. A data shelf may contain icm folders (a workspace that already has its own `AGENTS.md` and stages). Each is its own ICM: leave it untouched, and never fold it into a tree you build for the parent.
@@ -117,7 +117,7 @@ Then run the form's own checks, in its reference. If a step fails, fix the struc
 
 ## After you build or restructure
 
-Tell the owner to run `/librarian` on the result. It records `kind: icm` in the folder's `_index.md` and, if the folder is also to be a brain, applies the brain rules. This skill uses the librarian's `folder_scan.py` when installed, and works without it (the three questions in "First"); it never writes the `_index.md` marker itself.
+Tell the owner to run `/librarian` on the result. It records `kind: icm` in four `kind_*` keys in this workspace's `AGENTS.md` frontmatter, leaving the routing table alone, and never in `_index.md`, which `index.py` rebuilds. If the folder is also to be a brain, it applies the brain rules too. This skill uses the librarian's `folder_scan.py` when installed and works without it (the three questions in "First"); it never records the kind itself.
 
 ## If the folder is to be a brain
 
